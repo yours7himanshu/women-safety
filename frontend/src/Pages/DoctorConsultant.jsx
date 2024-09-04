@@ -1,7 +1,8 @@
 import "./DoctorConsultant.css"
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
-import Doctor from '../Components/Assets/doctor.jpg';
+// import Doctor from '../Components/Assets/doctor.jpg';
+import Women from '../Components/Assets/women.png'
 // import DoctorsList from "../Components/Doctor/DoctorsList";
 
 
@@ -97,7 +98,7 @@ function DoctorConsultant() {
 </form>
 
 <div className="image-container">
-<img src={Doctor} alt="" />
+<img src={Women} alt="" />
 </div>
 
 </div>
