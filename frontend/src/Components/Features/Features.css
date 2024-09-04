@@ -1,0 +1,29 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.features h1{
+    margin: 30px;
+    color:red;
+    font-size: 40px;
+}
+
+.features{
+    margin:0px 10px;
+    margin-top: 0px;
+
+    height: 100vh;
+    width:100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card-display{
+    display: flex;
+    justify-content: center;
+  margin-right: 10px;
+    flex-wrap: wrap;
+}
+
