@@ -19,6 +19,7 @@ import Emergency from "./Components/EmergencyButton/Emergency";
 import Donation from "./Pages/Donation";
 import FamilyContactForm from "./Pages/FamilyContactForm";
 import DetailDisplay from "./Pages/DetailDisplay";
+import Message from "./Components/Message Sent/Message";
 
 
 
@@ -46,6 +47,8 @@ function App() {
         <Route path="/donation" element = {<Donation/>}/>
         <Route path="/familyDetails" element = {<FamilyContactForm/>}/>
         <Route path="/detailDisplay" element = {<DetailDisplay/>}/>
+        <Route path="/message" element = {<Message/>}/>
+
 
 
 

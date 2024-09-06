@@ -1,10 +1,11 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import './FamilyDetailForm.css'; // Assuming you create a CSS file for styles
 
 function FamilyContactForm({ onSubmit }) {
     const [contact, setContact] = useState({
         name: '',
-        phone: '',
+        email: '',  // Include email in the initial state
+        // phone: '',
         relationship: ''
     });
 
@@ -21,14 +22,15 @@ function FamilyContactForm({ onSubmit }) {
         onSubmit(contact);
         setContact({
             name: '',
-            phone: '',
+            email: '',  // Reset email after submission
+            // phone: '',
             relationship: ''
         });
     };
 
     return (
         <form className="contact-form" onSubmit={handleSubmit}>
-            <h1 style={{margin:"0px 0px 0px 45px"}} >Add Contact...</h1>
+            <h1 style={{ margin: "0px 0px 0px 45px" }}>Add Contact...</h1>
             <div className="form-group">
                 <label>Name:</label>
                 <input 
@@ -40,6 +42,16 @@ function FamilyContactForm({ onSubmit }) {
                 />
             </div>
             <div className="form-group">
+                <label>Email:</label>
+                <input 
+                    type="email" 
+                    name="email"  // Corrected here
+                    value={contact.email} 
+                    onChange={handleChange} 
+                    required 
+                />
+            </div>
+            {/* <div className="form-group">
                 <label>Phone:</label>
                 <input 
                     type="tel" 
@@ -48,7 +60,7 @@ function FamilyContactForm({ onSubmit }) {
                     onChange={handleChange} 
                     required 
                 />
-            </div>
+            </div> */}
             <div className="form-group">
                 <label>Relationship:</label>
                 <input 

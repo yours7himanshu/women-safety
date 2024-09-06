@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const sendEmail = require('./src/utils/sendEmail');  // Import the sendEmail function
 const userRouter = require('./src/routes/userRoutes');
 const offerRouter = require('./src/routes/offerRouter');
 const patientRouter = require('./src/routes/patientRouter');
@@ -11,7 +12,7 @@ const db = require('./src/db/db');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const CONNECTION_STRING = "mongodb://127.0.0.1:27017/";
+const CONNECTION_STRING = "";
 
 // Connect to the database
 db.connect(CONNECTION_STRING)
@@ -20,13 +21,27 @@ db.connect(CONNECTION_STRING)
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // React app's URL
-  methods: 'GET,POST',
-  allowedHeaders: 'Content-Type, Authorization'
+  origin: ['http://localhost:5173'],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Route to send email
+app.post('/send-email', async (req, res) => {
+  const { emails, message } = req.body;
+
+  try {
+   const info = await sendEmail(emails, message);
+    res.status(200).json({ message: 'Emails sent successfully' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ message: 'Error sending email', error });
+  }
+});
 
 // Use the proxy routes
 app.use('/api/v1/proxy', proxyRouter);
