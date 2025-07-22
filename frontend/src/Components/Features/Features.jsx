@@ -1,89 +1,56 @@
-import "./Features.css"
-import Cards from "../Cards/Cards"
-import Location from "../Assets/Live Location.jpg"
-import Police from "../Assets/Police.jpg"
-import SOS from "../Assets/Emergency.jpg"
-import SelfDefence from "../Assets/Self Defence.jpg"
-import Problem from "../Assets/Problem1.jpg"
-import Donation from "../Assets/Donation.webp"
-import Contact from "../Assets/Contact.png"
-import Discord from "../Assets/Discord.jpg"
-import { Link } from "react-router-dom";
+import React from 'react';
 
-function Features() {
+const FeatureCard = ({ icon, title, description }) => {
   return (
-    <div className="features" >
-      <h1>Explore Now!!!</h1>
-      <div className="card-display">
+    <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center transform hover:-translate-y-2 transition-transform duration-300">
+      <div className="text-4xl text-pink-500 mb-4">{icon}</div>
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </div>
+  );
+};
 
+const Features = () => {
+  const featuresData = [
+    {
+      icon: '🛡️',
+      title: 'Self Defence',
+      description: 'Learn self-defense techniques to protect yourself in any situation.',
+    },
+    {
+      icon: '🧘',
+      title: 'Yoga & Meditation',
+      description: 'Find inner peace and strength through guided yoga and meditation sessions.',
+    },
+    {
+      icon: '👩‍⚕️',
+      title: 'Doctor Consultant',
+      description: 'Connect with experienced doctors for your health concerns.',
+    },
+    {
+      icon: '📍',
+      title: 'Live Location',
+      description: 'Share your live location with your trusted contacts for safety.',
+    },
+  ];
 
-  <Link to="/userLocation">  <Cards 
-     className="display-section"
-     image={Location} 
-     name="User Live Location"
-     />
-     </Link> 
-
-
-<Link to="/policeStation" >
-<Cards  
-className="display-section"
-     image={Police} 
-     name="PoliceStation Nearby"/>
-</Link>
-
-
-
-<Link to= "/emergency" >
-<Cards  
-className="display-section"
-     image={SOS} 
-     name="SOS"/></Link>
-
-
-<Link to="/selfDefence" >
-<Cards  
-className="display-section"
-     image={SelfDefence} 
-     name="Self Defense" style={{color:"black"}} />
-
-</Link>
-
-
-<Link to="/problem">
-<Cards  
-className="display-section"
-     image={Problem} 
-     name="Problem Window"/>
-</Link>
-
-<Link to="/donation" >
-<Cards  
-className="display-section"
-     image={Donation} 
-     name="Donation"/>
-</Link>
-
-
-<Link to="/detailDisplay"><Cards 
-     className="display-section"
-     image={Contact} 
-     name="Add Contacts"
-     />   
-     </Link>
-
-
-<Link to="https://discord.com/invite/6kpPn6bW" >
-<Cards 
-     className="display-section"
-     image={Discord} 
-     name="Community"
-     />
-</Link>
-
+  return (
+    <div className="bg-gray-100 py-16">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-12">Our Features</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {featuresData.map((feature, index) => (
+            <FeatureCard
+              key={index}
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Features
+export default Features;

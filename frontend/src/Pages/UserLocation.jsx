@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
-import "./Location.css";
 
 const UserLocation = () => {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -53,8 +52,8 @@ const UserLocation = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          emails: ['hdinkar264@gmail.com', 'ayush210042@gmail.com','shivamsaini1072005@gmail.com'],  // Replace with actual recipient(s)
-          message: `Please Help Me as fast as possible..Here is the current location: ${address}`  // Send the address in the email body
+          emails: ['hdinkar264@gmail.com', 'ayush210042@gmail.com','shivamsaini1072005@gmail.com'],
+          message: `Please Help Me as fast as possible..Here is the current location: ${address}`
         }),
       });
 
@@ -70,18 +69,18 @@ const UserLocation = () => {
   };
 
   return (
-    <div className='map-loc'>
-      <h1 style={{ color: "red" }}>Live Location Tracker</h1>
-      <p style={{ color: "red" }}>Latitude: {location.latitude}</p>
-      <p style={{ color: "blue" }}>Longitude: {location.longitude}</p>
-      <p style={{ color: "green", fontWeight: "900" }}>Address: {address ? address : 'Fetching address...'}</p>
+    <div className="p-10 flex flex-col gap-4 items-center">
+      <h1 className="text-red-600 text-3xl font-bold">Live Location Tracker</h1>
+      <p className="text-red-600 text-lg">Latitude: {location.latitude}</p>
+      <p className="text-blue-600 text-lg">Longitude: {location.longitude}</p>
+      <p className="text-green-600 font-extrabold text-lg">Address: {address ? address : 'Fetching address...'}</p>
 
       {location.latitude && location.longitude && (
         <>
           <MapContainer
             center={[location.latitude, location.longitude]}
             zoom={13}
-            style={{ height: '400px', width: '100%' }}
+            className="h-[400px] w-full rounded-lg shadow-md"
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -92,8 +91,7 @@ const UserLocation = () => {
             </Marker>
           </MapContainer>
 
-          {/* Button to trigger email */}
-          <button onClick={sendLocationEmail} style={{ marginTop: '20px', padding: '10px', fontSize: '16px' }}>
+          <button onClick={sendLocationEmail} className="mt-5 px-5 py-2 text-lg bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300">
             Send Location via Email
           </button>
         </>

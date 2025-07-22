@@ -1,6 +1,4 @@
-import  { useState, useEffect } from 'react';
-import "./TaskManager.css"
-
+import { useState, useEffect } from 'react';
 
 function MentalHealthTaskManager() {
   const [tasks, setTasks] = useState([
@@ -36,30 +34,30 @@ function MentalHealthTaskManager() {
   };
 
   return (
-    <div className="container">
-      <h2 className="header">Mental Health Task Manager</h2>
-      <ul>
+    <div className="w-screen h-screen font-sans pt-24 flex flex-col items-center">
+      <h2 className="text-center mb-5 text-4xl text-blue-800 font-bold">Mental Health Task Manager</h2>
+      <ul className="w-full max-w-md">
         {tasks.map((item) => (
           <li
             key={item.id}
-            className={`taskItem ${item.completed ? 'completedTask' : ''}`}
+            className={`flex flex-row-reverse items-center w-11/12 mt-2 mb-2 cursor-pointer ml-8 ${item.completed ? 'line-through text-gray-600' : ''}`}
             onClick={() => handleToggle(item.id)}
           >
             <input
               type="checkbox"
               checked={item.completed}
-              className="checkbox"
+              className="mr-2 h-4 w-4"
               onChange={() => handleToggle(item.id)}
             />
-            <span>{item.task}</span>
+            <span className="block w-full text-lg">{item.task}</span>
           </li>
         ))}
       </ul>
-      <div className="progressBar">
-        <p>{` Tasks Complete:  ${calculatePercentage()}% `}</p>
-        <div className="progressBarInner">
+      <div className="mt-5 text-center w-2/5">
+        <p className="mb-2 text-2xl text-red-600 font-extrabold">{`Tasks Complete: ${calculatePercentage()}%`}</p>
+        <div className="w-full bg-gray-300 rounded-md">
           <div
-            className="progressBarProgress"
+            className="bg-green-500 h-5 rounded-md"
             style={{ width: `${calculatePercentage()}%` }}
           ></div>
         </div>
