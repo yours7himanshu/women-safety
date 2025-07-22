@@ -1,10 +1,6 @@
-import "./DoctorConsultant.css"
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
-// import Doctor from '../Components/Assets/doctor.jpg';
-import Women from '../Components/Assets/women.png'
-// import DoctorsList from "../Components/Doctor/DoctorsList";
-
+import Women from '../Components/Assets/women.png';
 
 function DoctorConsultant() {
    const [name,setName] = useState('');
@@ -12,7 +8,6 @@ function DoctorConsultant() {
    const [phone_no,setPhone]= useState('');
    const[problem,setProblem]= useState('');
    const [description,setDescription]=useState('');
-
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -34,83 +29,61 @@ function DoctorConsultant() {
     }
 
   return (
-    <div className="main" >
-   <h1>  Feel free to share your problem with Us!!!</h1>
-<div className="doctor-consult">
-<form onSubmit={handleSubmit} method="post" >
-
-  <div className="label-input">
-  
-    <input 
-      type="name"
-      required
-      placeholder="Enter your name"
-      value={name}
-      onChange={(e)=>setName(e.target.value)}
-    />
-  </div>
-
-  <div className="label-input">
-
-    <input
-      type="email" 
-      required
-      placeholder="Enter your Email"
-      value={email}
-      onChange={(e)=>setEmail(e.target.value)}
-    />
-  </div>
-
-  <div className="label-input">
-    
-    <input
-      type="number" 
-      required
-      placeholder="Enter your Mobile No"
-      value={phone_no}
-      onChange={(e)=>setPhone(e.target.value)}
-    />
-  </div>
-
-  <div className="label-input">
-  
-    <input
-      type="text" 
-      required
-      placeholder="Enter your Problem"
-      value={problem}
-      onChange={(e)=>setProblem(e.target.value)}
-    />
-  </div>
-
-  <div className="label-input">
- 
-    <input
-      type="text" 
-      required
-      placeholder="Enter Description of your Problem"
-      value={description}
-      onChange={(e)=>setDescription(e.target.value)}
-    />
-  </div>
-
-  <button className="form-btn" >Submit</button>
-</form>
-
-<div className="image-container">
-<img src={Women} alt="" />
-</div>
-
-</div>
-
-{/* <DoctorsList /> */}
-
-
-   <ToastContainer/>
+    <div className="p-2 h-screen w-screen flex flex-col items-center justify-center">
+      <h1 className="my-12 text-blue-800 text-3xl font-bold text-center">Feel free to share your problem with Us!!!</h1>
+      <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full h-full gap-8">
+        <form onSubmit={handleSubmit} method="post" className="w-full md:w-1/2 flex flex-col mb-5 items-center">
+          <input 
+            type="text"
+            required
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e)=>setName(e.target.value)}
+            className="w-3/4 p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="email" 
+            required
+            placeholder="Enter your Email"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+            className="w-3/4 p-2 mt-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="number" 
+            required
+            placeholder="Enter your Mobile No"
+            value={phone_no}
+            onChange={(e)=>setPhone(e.target.value)}
+            className="w-3/4 p-2 mt-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="text" 
+            required
+            placeholder="Enter your Problem"
+            value={problem}
+            onChange={(e)=>setProblem(e.target.value)}
+            className="w-3/4 p-2 mt-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="text" 
+            required
+            placeholder="Enter Description of your Problem"
+            value={description}
+            onChange={(e)=>setDescription(e.target.value)}
+            className="w-3/4 p-2 mt-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button className="w-3/4 p-3 mt-5 bg-blue-600 text-white border-none rounded-md cursor-pointer hover:bg-blue-700 transition-colors duration-300">
+            Submit
+          </button>
+        </form>
+        <div className="flex justify-center items-start h-screen w-full md:w-1/2">
+          <img src={Women} alt="" className="w-[400px] h-[500px] rounded-lg object-cover" />
+        </div>
+      </div>
+      <ToastContainer/>
     </div>
-
-    
-  )
+  );
 }
 
-export default DoctorConsultant
+export default DoctorConsultant;

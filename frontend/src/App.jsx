@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Shop from "./Pages/Shop";
 import SelfDefense from "./Pages/SelfDefence";
@@ -60,7 +59,7 @@ function App() {
       
      
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import './FamilyDetailForm.css'; // Assuming you create a CSS file for styles
 
 function FamilyContactForm({ onSubmit }) {
     const [contact, setContact] = useState({
         name: '',
-        email: '',  // Include email in the initial state
-        // phone: '',
+        email: '',
         relationship: ''
     });
 
@@ -22,56 +20,50 @@ function FamilyContactForm({ onSubmit }) {
         onSubmit(contact);
         setContact({
             name: '',
-            email: '',  // Reset email after submission
-            // phone: '',
+            email: '',
             relationship: ''
         });
     };
 
     return (
-        <form className="contact-form" onSubmit={handleSubmit}>
-            <h1 style={{ margin: "0px 0px 0px 45px" }}>Add Contact...</h1>
-            <div className="form-group">
-                <label>Name:</label>
+        <form className="mb-5 mt-10 p-2 flex flex-col gap-5 justify-center items-center w-full md:w-3/4 lg:w-1/2 mx-auto" onSubmit={handleSubmit}>
+            <h1 className="text-xl font-bold text-gray-800">Add Contact...</h1>
+            <div className="mb-4 w-full">
+                <label className="block text-gray-700 text-sm font-bold mb-2">Name:</label>
                 <input 
                     type="text" 
                     name="name" 
                     value={contact.name} 
                     onChange={handleChange} 
                     required 
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
             </div>
-            <div className="form-group">
-                <label>Email:</label>
+            <div className="mb-4 w-full">
+                <label className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
                 <input 
                     type="email" 
-                    name="email"  // Corrected here
+                    name="email" 
                     value={contact.email} 
                     onChange={handleChange} 
                     required 
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
             </div>
-            {/* <div className="form-group">
-                <label>Phone:</label>
-                <input 
-                    type="tel" 
-                    name="phone" 
-                    value={contact.phone} 
-                    onChange={handleChange} 
-                    required 
-                />
-            </div> */}
-            <div className="form-group">
-                <label>Relationship:</label>
+            <div className="mb-4 w-full">
+                <label className="block text-gray-700 text-sm font-bold mb-2">Relationship:</label>
                 <input 
                     type="text" 
                     name="relationship" 
                     value={contact.relationship} 
                     onChange={handleChange} 
                     required 
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
             </div>
-            <button type="submit" className="submit-btn">Save Contact</button>
+            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+                Save Contact
+            </button>
         </form>
     );
 }

@@ -73,11 +73,12 @@ const MapWithPoliceStations = ({ lat, lng }) => {
   }, [lat, lng, map]);
 
   return (
-    <div>
-      <div id="map" style={{ height: '500px' }}></div>
-      <ul>
+    <div className="p-4">
+      <div id="map" className="h-[500px] w-full rounded-lg shadow-md"></div>
+      <h2 className="text-2xl font-bold mt-6 mb-4">Nearby Police Stations:</h2>
+      <ul className="list-disc pl-5">
         {stations.map((station, index) => (
-          <li key={index}>{station.tags?.name || 'Unnamed Police Station'}</li>
+          <li key={index} className="mb-2 text-gray-700">{station.tags?.name || 'Unnamed Police Station'}</li>
         ))}
       </ul>
     </div>

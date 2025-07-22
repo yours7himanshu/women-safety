@@ -12,7 +12,7 @@ const db = require('./src/db/db');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const CONNECTION_STRING = "";
+const CONNECTION_STRING = "mongodb://localhost:27017";
 
 // Connect to the database
 db.connect(CONNECTION_STRING)
@@ -21,7 +21,7 @@ db.connect(CONNECTION_STRING)
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173'],
+  
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
