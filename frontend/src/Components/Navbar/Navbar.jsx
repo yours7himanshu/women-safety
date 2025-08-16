@@ -48,7 +48,7 @@ function Navbar() {
               {isActive === "About" && <hr className="border-none w-4/5 h-1 rounded-full bg-white" />}
             </li>
             <li onClick={() => { setIsActive("Services"); setIsOpenMenu(false); }} className="cursor-pointer">
-              <Link to="/sevices" className="no-underline text-white">Explore</Link>
+              <Link to="/services" className="no-underline text-white">Services</Link>
               {isActive === "Services" && <hr className="border-none w-4/5 h-1 rounded-full bg-white" />}
             </li>
           </>

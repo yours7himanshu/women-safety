@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import axios from 'axios'
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -8,15 +9,10 @@ function LoginSignUp() {
 
   async function handleLogin(e) {
     e.preventDefault();
-    const response = await fetch("http://localhost:3001/api/v1/u/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
-    console.log(data);
+    const response = await axios.post("http://localhost:3001/api/v1/u/login", { email, password });
+    
+    console.log(response.data);
+    const data = response.data;
     if (data.accessToken) {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("isLogin", true);

@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import Shop from "./Pages/Shop";
 import SelfDefense from "./Pages/SelfDefence";
 import LoginSignUp from "./Pages/LoginSignUp";
@@ -7,12 +8,12 @@ import NewsLetter from "./Components/NewsLetter/NewsLetter";
 import UserLocation from "./Pages/UserLocation";
 import Footer from "./Components/Footer/Footer";
 import SignUp from "./Pages/SignUp";
-import DoctorConsultant from "./Pages/DoctorConsultant";
-import MentalHealthTaskManager from "./Pages/MentalHealthTaskManager";
+import Community from "./Components/Community/Community";
+
 import Contact from "./Pages/Contact";
 import Services from "./Pages/Services";
 import About from "./Pages/About";
-import DoctorsList from "./Components/Doctor/DoctorsList";
+
 import PoliceStation from "./Pages/PoliceStation";
 import Emergency from "./Components/EmergencyButton/Emergency";
 import Donation from "./Pages/Donation";
@@ -26,19 +27,21 @@ function App() {
   return (
     <>
       <Navbar />
+      <ScrollToTop />
       <Routes>
     
         <Route path="/" element={<Shop />} />
         <Route path="/login" element={<LoginSignUp />} />
         <Route path="/login/SignUp" element={<SignUp />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/problem" element={<DoctorConsultant />} />
+       
         <Route path="/submit-newsletter" element={<NewsLetter />} />
-        <Route path="/taskManager" element={<MentalHealthTaskManager />} />
+        
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services/>} />
         <Route path="/about" element={<About />} />
-        <Route path="/findDoctor" element={<DoctorsList />} />
+        <Route path="/community" element={<Community />} />
+        
         <Route path="/userLocation" element = {<UserLocation/>}/>
         <Route path="/policeStation" element = {<PoliceStation/>}/>
         <Route path="/emergency" element = {<Emergency/>}/>
@@ -59,7 +62,7 @@ function App() {
       
      
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

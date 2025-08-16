@@ -1,9 +1,9 @@
-import React from 'react';
+
 import women from '../Assets/women.png'; // Assuming the path is correct
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 overflow-hidden">
+    <div className="relative min-h-screen p-10 max-md:p-5 bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-10 left-10 w-32 h-32 bg-pink-200 rounded-full opacity-20 blur-xl animate-pulse"></div>
@@ -11,7 +11,7 @@ const Hero = () => {
         <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-300 rounded-full opacity-10 blur-lg animate-bounce"></div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-12 lg:py-20">
+      <div className="relative z-10 container mx-auto px-4 py-12 lg:py-20  ">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-screen">
           
           {/* Text Content */}

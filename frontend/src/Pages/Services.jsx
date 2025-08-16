@@ -45,7 +45,7 @@ function Services() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4">
+    <div className="min-h-screen pt-30 bg-gray-100 py-12 px-4">
       <div className="container mx-auto">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">Our Services</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
