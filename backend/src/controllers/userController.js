@@ -4,7 +4,7 @@ const { authSchemaRegister, authSchemaLogin } = require('../utils/validation_sch
 const { signAccessToken, signRefreshToken, verifyRefreshToken, invalidateRefreshToken } = require('../config/tokenGenerator')
 const createError = require('http-errors');
 const User = require('../models/user')
-require('dotenv').config('../../.env');
+// Environment variables are loaded in index.js
 
 // Module scaffolding
 const userController = {};
