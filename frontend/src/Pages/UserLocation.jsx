@@ -6,6 +6,7 @@ import axios from 'axios';
 const UserLocation = () => {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [address, setAddress] = useState("");
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     let watchId = null;
@@ -20,7 +21,7 @@ const UserLocation = () => {
           // Fetch address using reverse geocoding
           const fetchAddress = async () => {
             try {
-              const response = await axios.get(`http://localhost:3001/api/v1/proxy/reverse`, {
+              const response = await axios.get(`${backendUrl}/api/v1/proxy/reverse`, {
                 params: {
                   format: 'json',
                   lat: latitude,
@@ -60,7 +61,7 @@ const UserLocation = () => {
             // Fetch address using reverse geocoding
             const fetchAddress = async () => {
               try {
-                const response = await axios.get(`http://localhost:3001/api/v1/proxy/reverse`, {
+                const response = await axios.get(`${backendUrl}/api/v1/proxy/reverse`, {
                   params: {
                     format: 'json',
                     lat: latitude,
@@ -108,7 +109,7 @@ const UserLocation = () => {
 
   const sendLocationEmail = async () => {
     try {
-      const response = await fetch('http://localhost:3001/send-email', {
+      const response = await fetch(`${backendUrl}/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

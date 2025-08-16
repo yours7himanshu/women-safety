@@ -5,10 +5,11 @@ import axios from "axios";
 
 function NewsLetter() {
   const [email, setEmail] = useState("");
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await axios.post("http://localhost:3001/api/v1/u/submit-newsletter",{email});
+    const response = await axios.post(`${backendUrl}/api/v1/u/submit-newsletter`,{email});
     if(response.data.success){
       toast.success("You will be notified of our upcoming deals");
     }

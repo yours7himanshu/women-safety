@@ -6,10 +6,10 @@ import { ToastContainer, toast } from 'react-toastify';
 function LoginSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   async function handleLogin(e) {
     e.preventDefault();
-    const response = await axios.post("http://localhost:3001/api/v1/u/login", { email, password });
+    const response = await axios.post(`${backendUrl}/api/v1/u/login`, { email, password });
     
     console.log(response.data);
     const data = response.data;

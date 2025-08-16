@@ -8,10 +8,10 @@ function DoctorConsultant() {
    const [phone_no,setPhone]= useState('');
    const[problem,setProblem]= useState('');
    const [description,setDescription]=useState('');
-
+   const backendUrl = import.meta.env.VITE_BACKEND_URL;
     async function handleSubmit(e) {
         e.preventDefault();
-        const response = await fetch("http://localhost:3001/api/v1/u/patient", {
+        const response = await fetch(`${backendUrl}/api/v1/u/patient`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

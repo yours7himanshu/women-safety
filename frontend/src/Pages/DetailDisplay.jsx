@@ -5,6 +5,7 @@ function DetailDisplay() {
     const [address, setAddress] = useState('');
     const [emailStatus, setEmailStatus] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     // Get current location
     const getCurrentLocation = () => {
@@ -33,7 +34,7 @@ function DetailDisplay() {
     // Fetch address from coordinates
     const fetchAddress = async (lat, lng) => {
         try {
-            const response = await fetch(`http://localhost:3001/api/v1/proxy/reverse?format=json&lat=${lat}&lon=${lng}`);
+            const response = await fetch(`${backendUrl}/api/v1/proxy/reverse?format=json&lat=${lat}&lon=${lng}`);
             const data = await response.json();
             if (data && data.display_name) {
                 setAddress(data.display_name);
@@ -72,7 +73,7 @@ Time sent: ${new Date().toLocaleString()}
 
 This is an automated emergency message from ProtectHerZone app.`;
 
-            const response = await fetch('http://localhost:3001/send-email', {
+            const response = await fetch(`${backendUrl}/send-email`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -124,7 +125,7 @@ Time sent: ${new Date().toLocaleString()}
 
 This location update was sent from ProtectHerZone app.`;
 
-            const response = await fetch('http://localhost:3001/send-email', {
+            const response = await fetch(`${backendUrl}/send-email`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

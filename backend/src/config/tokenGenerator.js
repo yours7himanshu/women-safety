@@ -10,7 +10,6 @@ module.exports = {
       const secret = process.env.ACCESS_TOKEN_SECRET;
       const options = {
         expiresIn: '10s',
-        issuer: 'localhost',
         audience: userId
       }
       JWT.sign(payload, secret, options, (err, token) => {
@@ -29,7 +28,7 @@ module.exports = {
       const secret = process.env.REFRESH_TOKEN_SECRET;
       const options = {
         expiresIn: '10d',
-        issuer: 'localhost',
+       
         audience: userId
       }
       JWT.sign(payload, secret, options, (err, token) => {

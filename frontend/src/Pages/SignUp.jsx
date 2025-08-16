@@ -8,10 +8,11 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;  
   
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await fetch("http://localhost:3001/api/v1/u/register", {
+    const response = await fetch(`${backendUrl}/api/v1/u/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

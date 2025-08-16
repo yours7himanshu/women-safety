@@ -12,7 +12,7 @@ const db = require('./src/db/db');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const CONNECTION_STRING = "mongodb://localhost:27017";
+const CONNECTION_STRING = process.env.MONGO_URI;
 
 // Connect to the database
 db.connect(CONNECTION_STRING)
