@@ -52,6 +52,7 @@ app.use("/api/v1/u/", patientRouter);
 
 // Protected route
 app.get('/', verifyAccessToken, (req, res) => res.send('Hello Im a protected route'));
+app.get('/', (req, res) => res.send('Server is working fine'));
 
 // 404 Not Found middleware
 app.use(notFoundMiddleware);
