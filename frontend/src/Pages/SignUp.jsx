@@ -2,32 +2,59 @@ import { useState } from "react";
 import { Link} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function SignUp() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;  
+  const [loading,setLoading]=useState(false);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL; 
+  const navigate = useNavigate(); 
   
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await fetch(`${backendUrl}/api/v1/u/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, username, email, password }),
-    });
-    const data = await response.json();
-    if (data.accessToken) {
-      toast.success("Registration Successful",{
-        position: "top-center",
+    setLoading(true);
+    
+    try {
+      const response = await axios.post(`${backendUrl}/api/v1/u/register`, {
+        name, 
+        username, 
+        email, 
+        password
       });
-     
-    } else {
-      toast.error(data.error.message,{
-        position:"top-center",
+      
+      const data = response.data;
+      if (data.accessToken) {
+        toast.success("Registration Successful!", {
+          position: "top-center",
+        });
+        setLoading(false);
+        
+        // Add a delay before navigation to let user see the toast
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      } else {
+        setLoading(false);
+        toast.error(data.error?.message || "Registration failed. Please try again.", {
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('Registration error:', error);
+      
+      // Handle different types of errors
+      const errorMessage = error.response?.data?.error?.message || 
+                          error.response?.data?.message || 
+                          error.message || 
+                          "Registration failed. Please try again.";
+      
+      toast.error(errorMessage, {
+        position: "top-center",
       });
     }
   }
@@ -189,14 +216,14 @@ function SignUp() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg className="h-5 w-5 text-pink-300 group-hover:text-pink-200 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                 </svg>
               </span>
-              Create My Account
+              {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> : "Create My Account"}
             </button>
           </form>
 
@@ -261,7 +288,7 @@ function SignUp() {
             <svg className="w-4 h-4 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
             </svg>
-            <span className="text-xs text-pink-700 ml-1">Built with care for women's safety</span>
+            <span className="text-xs text-pink-700 ml-1">Built with care for women&apos;s safety</span>
           </div>
         </div>
       </div>

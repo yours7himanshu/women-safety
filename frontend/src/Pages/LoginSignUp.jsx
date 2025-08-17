@@ -7,8 +7,11 @@ function LoginSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const [loading,setLoading]=useState(false);
+
   async function handleLogin(e) {
     e.preventDefault();
+    setLoading(true);
     const response = await axios.post(`${backendUrl}/api/v1/u/login`, { email, password });
     
     console.log(response.data);
@@ -18,6 +21,7 @@ function LoginSignUp() {
       localStorage.setItem("isLogin", true);
       localStorage.setItem("username", data.username);
       localStorage.setItem("user", (data._id));
+      setLoading(false);
       window.location.href = "/shop";
     } else {
       toast.error(data.error.message || "Login Failed",{
@@ -118,7 +122,7 @@ function LoginSignUp() {
                   <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                 </svg>
               </span>
-              Sign In Securely
+              {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> : "Sign In Securely"}
             </button>
           </form>
 
@@ -137,7 +141,7 @@ function LoginSignUp() {
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
             <Link 
-              to="/login/SignUp"
+              to="/signUp"
               className="group inline-flex items-center font-medium text-pink-600 hover:text-pink-500 transition-colors duration-300"
             >
               <span>Create your account</span>
