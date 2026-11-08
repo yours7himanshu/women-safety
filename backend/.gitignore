@@ -132,3 +132,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+
+# Cloudflare Wrangler
+.wrangler
+!.env.example

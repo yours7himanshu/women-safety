@@ -1,6 +1,6 @@
 // Dependencies
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs');
 
 // user schema
 const userSchema = new mongoose.Schema({
@@ -26,14 +26,14 @@ const userSchema = new mongoose.Schema({
 // hash password before saving to database
 userSchema.methods.isValidPassword = async function (password) {
   try {
-    return await bcrypt.compare(password, this.password)
+    return await bcrypt.compare(password, this.password);
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-// create model
-const User = mongoose.model('User', userSchema);
+// create model safely for edge & serverless environments
+const User = (mongoose.models && mongoose.models.User) || mongoose.model('User', userSchema);
 
 // export model
 module.exports = User;

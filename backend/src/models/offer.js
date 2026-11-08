@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const offerSchema = new mongoose.Schema({
-    email:{
-        type:String,
-        required:true
-    }
-})
+  email: {
+    type: String,
+    required: true
+  }
+});
 
- const Offer = new mongoose.model("Offer",offerSchema);
- module.exports = Offer;
+const Offer = (mongoose.models && mongoose.models.Offer) || mongoose.model("Offer", offerSchema);
+module.exports = Offer;

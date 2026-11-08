@@ -1,0 +1,66 @@
+name: Test & Deploy Women-Safety Backend Worker to Cloudflare
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - '.github/workflows/cloudflare-worker.yml'
+  workflow_dispatch:
+
+jobs:
+  test-backend-worker:
+    runs-on: ubuntu-latest
+    name: Run Cloudflare Worker Unit & Integration Tests
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: 'backend/package-lock.json'
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: backend
+
+      - name: Run Backend Worker Tests
+        run: npm test
+        working-directory: backend
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          REFRESH_TOKEN_SECRET: ${{ secrets.REFRESH_TOKEN_SECRET }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+
+  deploy-backend-worker:
+    needs: test-backend-worker
+    runs-on: ubuntu-latest
+    name: Deploy Backend Worker to Cloudflare
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: 'backend/package-lock.json'
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: backend
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: 'backend'
